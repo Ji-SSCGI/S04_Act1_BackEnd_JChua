@@ -49,7 +49,7 @@ function battle(attacker, defender, move) {
     let damage = (move.damage() - defender.defense) * advantage;
     damage = damage < 0 ? 0 : damage;
     defender.hp -= damage;
-    console.log(`${attacker.name} uses ${move.name} and deals ${damage} damage to ${defender.name}. ${defender.name} has survived.`);
+    console.log(`${attacker.name} uses ${move.name} and deals ${damage} damage to ${defender.name}.`);
     return defender.hp <= 0;
 }
 
@@ -177,6 +177,23 @@ function selectMove(attacker) {
     }
 }
 
+// let selectedPokemons = selectPokemon();
+// if (selectedPokemons) {
+//     let { first, second } = selectedPokemons;
+//     let selectedAttacker = selectAttacker(first, second);
+//     if (selectedAttacker) {
+//         let { attacker, defender } = selectedAttacker;
+
+//         while (attacker.hp > 0 && defender.hp > 0) {
+//             let move = selectMove(attacker);
+//             move && battle(attacker, defender, move) ? console.log(`${defender.name} has fainted. ${attacker.name} wins!`) :
+
+//                 [attacker, defender] = [defender, attacker]; // Alternate turns
+//         }
+//     }
+// }
+
+// Start battle
 let selectedPokemons = selectPokemon();
 if (selectedPokemons) {
     let { first, second } = selectedPokemons;
@@ -186,9 +203,15 @@ if (selectedPokemons) {
 
         while (attacker.hp > 0 && defender.hp > 0) {
             let move = selectMove(attacker);
-            move && battle(attacker, defender, move) ? console.log(`${defender.name} has fainted. ${attacker.name} wins!`) :
+            if (move) {
+                let defenderFainted = battle(attacker, defender, move);
+                console.log(defenderFainted ? `${defender.name} has fainted! ${attacker.name} wins!` : `${defender.name} survived with ${defender.hp} HP left.`);
 
-                [attacker, defender] = [defender, attacker]; // Alternate turns
+                if (defenderFainted) break; // End battle if a Pokémon faints
+
+                // Swap turns
+                [attacker, defender] = [defender, attacker];
+            }
         }
     }
 }
