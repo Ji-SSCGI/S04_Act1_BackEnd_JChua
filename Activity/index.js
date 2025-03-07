@@ -70,8 +70,8 @@ let charmander = new Pokemon(
     "Charmander",
     "Fire",
     200,
-    60,
-    40,
+    55,
+    45,
     { name: "Ember", power: 65 + 65 * 0.25 },
     { name: "Flamethrower", power: 65 + 65 * 0.40 },
     { name: "Fire Spin", power: 65 + 65 * 0.65 }
@@ -176,22 +176,6 @@ function selectMove(attacker) {
         return null;
     }
 }
-
-// let selectedPokemons = selectPokemon();
-// if (selectedPokemons) {
-//     let { first, second } = selectedPokemons;
-//     let selectedAttacker = selectAttacker(first, second);
-//     if (selectedAttacker) {
-//         let { attacker, defender } = selectedAttacker;
-
-//         while (attacker.hp > 0 && defender.hp > 0) {
-//             let move = selectMove(attacker);
-//             move && battle(attacker, defender, move) ? console.log(`${defender.name} has fainted. ${attacker.name} wins!`) :
-
-//                 [attacker, defender] = [defender, attacker]; // Alternate turns
-//         }
-//     }
-// }
 
 // Start battle
 let selectedPokemons = selectPokemon();
